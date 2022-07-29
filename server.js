@@ -21,6 +21,7 @@ const pool = new pg.Pool({
 // });
 
 //const PORT = 3000;
+const PORT = process.env.PORT || 3000
 const app = express();
 
 app.get("/books", (req, res) => {
