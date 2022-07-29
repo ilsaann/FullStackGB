@@ -3,16 +3,16 @@ import pg from "pg";
 import { readFile } from "fs/promises";
 import dotenv from "dotenv";
 
-
 dotenv.config();
 
 const pool = new pg.Pool({
-    connectionString: process.env.DATABASE_URL,
-    (process.env.NODE_ENV === 'production' ? {
-            ssl: {
-            refectUnauthorized: false,
-            },
-        }
+  connectionString: process.env.DATABASE_URL,
+  ...(process.env.NODE_ENV === "production"
+    ? {
+        ssl: {
+          refectUnauthorized: false,
+        },
+      }
     : {}),
 });
 
@@ -21,7 +21,7 @@ const pool = new pg.Pool({
 // });
 
 //const PORT = 3000;
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.get("/books", (req, res) => {
