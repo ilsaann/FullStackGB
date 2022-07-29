@@ -35,11 +35,11 @@ app.get("/books", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
-  readFile("public/index.html", "utf-8").then((string) => {
-    res.send(string);
-  });
-});
+// app.get("/", (req, res) => {
+//   readFile("public/index.html", "utf-8").then((string) => {
+//     res.send(string);
+//   });
+// });
 
 app.use(express.static("public"));
 
