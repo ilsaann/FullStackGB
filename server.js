@@ -7,13 +7,17 @@ dotenv.config();
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
-  ...(process.env.NODE_ENV === "production"
-    ? {
-        ssl: {
-          refectUnauthorized: false,
-        },
-      }
-    : {}),
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
+  // ...(process.env.NODE_ENV === "production"
+  //   ? {
+  //       ssl: {
+  //         rejectUnauthorized: false,
+  //       },
+  //     }
+  //   : {}),
 });
 
 // const pool = new pg.Pool({
