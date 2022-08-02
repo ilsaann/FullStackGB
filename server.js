@@ -1,23 +1,22 @@
 import express from "express";
 import pg from "pg";
 import { readFile } from "fs/promises";
+
 import dotenv from "dotenv";
 
 dotenv.config();
 
+//const { DATABASE_URL, NODE_ENV, PORT } = process.env;
+
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl:
-    process.env.NODE_ENV === "production"
-      ? { rejectUnauthorized: false }
-      : false,
-  // ...(process.env.NODE_ENV === "production"
-  //   ? {
-  //       ssl: {
-  //         rejectUnauthorized: false,
-  //       },
-  //     }
-  //   : {}),
+  ...(process.env.NODE_ENV === "production"
+    ? {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
+    : {}),
 });
 
 // const pool = new pg.Pool({
@@ -46,3 +45,18 @@ app.use(express.static("public"));
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
+
+// const pool = new pg.Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl:
+//     process.env.NODE_ENV === "production"
+//       ? { rejectUnauthorized: false }
+//       : false,
+//   // ...(process.env.NODE_ENV === "production"
+//   //   ? {
+//   //       ssl: {
+//   //         rejectUnauthorized: false,
+//   //       },
+//   //     }
+//   //   : {}),
+// });
